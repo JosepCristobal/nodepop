@@ -4,14 +4,14 @@
 
 El objetivo es dar soporte de Backend a una aplicación de venta de artículos de segunda mano, llamada Nodepop.
 
-##Requisitos de instalación
+## Requisitos de instalación
 
-###Requisitos previos
+### Requisitos previos
 * Node version de desarrollo v8.9.1
 * MongoDB versión de desarrollo v3.4.10
 * Git
 
-###Instalación
+### Instalación
 1. Clonar con git desde repositorio (https://github.com/JosepCristobal/nodepop)
 2. Situarnos en carpeta nodepop
 3. Instalamos las dependencia con $npm install.
@@ -40,19 +40,19 @@ $npm start
 Para arrancar en modo cluster con múltiples instancias:
 $npm cluster
 
-###Operaciones del API
+### Operaciones del API
 * Registro de usuarios (nombre, email, constraseña).
 * Autenticación (email, contraseña).
 * Consulta de anuncios según varios criterios de búsqueda.
 * Creación de anuncios.
 * Consulta de TAGs para clasificar los anuncios.
 
-###Documentación 
+### Documentación 
 Para más información consultar en la [WIKI](https://github.com/JosepCristobal/nodepop/wiki) del proyecto.
 
-###Notas de versión
+### Notas de versión
 * 0.0.1 Start.
 
-###Autor
+### Autor
 Josep Cristobal 
 
