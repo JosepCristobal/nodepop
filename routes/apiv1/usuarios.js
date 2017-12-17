@@ -1,5 +1,3 @@
-//import { Error } from 'mongoose';
-
 'use strict';
 
 const express = require('express');
@@ -20,13 +18,18 @@ router.use(jwtAuth(),(req,res,next) => {
 // cargar el modelo Agente
 const Usuario = require('../../models/Usuario');
 
+/**
+ * Damos de alta usuarios 
+ * con método POST
+ */
 
-router.post('/', (req,res,next) => {
+router.post('/', async (req,res,next) => {
     //Creamos un usuario  en memoria segun su modelo ya definido
     if(!req.body.name||!req.body.clave||!req.body.email){
         console.log('No se puede insertar usuario nuevo, faltan datos')
         next(err)
     }else{
+        //Verificamos la integridad de la cuenta de correo con una expresión regular
         const ExpresionCorreo = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
         if (!ExpresionCorreo.test(req.body.email)){
             console.log('error de formato')
@@ -34,6 +37,20 @@ router.post('/', (req,res,next) => {
             next(err)
             return ;
         } else {
+            //Debemos verificar que la cuenta de correo no exista en la Base de datos
+            const filterV = {};
+            filterV.email = req.body.email;
+            //llamamos al metodo Usuario.findByEmailAndPasswordS que hemos creado en el modelo
+            const rowsV = await Usuario.findByEmailAndPasswordS(filterV);
+
+        if(rowsV){
+            console.log('Usuario duplicado')
+            const err = new Error('Usuario duplicado')
+            next(err);
+            return;
+        }else{
+            console.log('Usuario correcto')
+        }
             //El correo ha pasado la prueva de validación
             const usuario = new Usuario(req.body);
             // lo persistimos en la coleccion de agentes
@@ -47,9 +64,10 @@ router.post('/', (req,res,next) => {
     
     });
     
-    /**
+/**
  * GET /Usuario
  * Obtener validación de usuario
+ * con usuario, password y token podremos consultar la lista de usuarios
  */
 
 router.get('/', async (req, res, next) => {
@@ -78,4 +96,21 @@ router.get('/', async (req, res, next) => {
         next(err)
     };
 });
+
+/**
+ * DELETE /usuarios
+ * Elimina un usuario
+ */
+router.delete('/:id', async (req,res, next) =>{
+    try{
+    const _id = req.params.id;
+    await Usuario.remove({_id: _id }).exec();
+    res.json({success: true});
+    }catch (err){
+        next(err);
+    }
+
+})
+
+
 module.exports = router;

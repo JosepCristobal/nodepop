@@ -52,6 +52,9 @@ Instalamos dotenv para poder crear variable de entorno en .env
 Para insertar un array en el módulo de anuncios pasaremos tantos tags como tipos tengamos de tags
 Activado el includeTotal, este nos devolverá la cantidad total de registros de la consulta
 en /bin creamos install_db
+en usuarios creamos la validación de formato del email en las altas
+en ususarios verificamos la duplicidad de usuarios al hacer las altas
+en anuncios añadiremos la posibilidad de updatearlos y de borrarlos
 
 **Para más información consultar en la [WIKI](https://github.com/JosepCristobal/nodepop/wiki) del proyecto 
 

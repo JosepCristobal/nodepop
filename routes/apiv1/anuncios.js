@@ -101,4 +101,34 @@ router.get('/', async (req, res, next) => {
     };
 });
 
+/**
+ * PUT /anuncios
+ * Actualiza un anuncio
+ */
+router.put('/:id', async (req, res, next) => {
+    try{
+       const _id = req.params.id; 
+       const data = req.body;
+       const anuncioActualizado = await Anuncios.findOneAndUpdate({_id: _id}, data, {new:true}).exec();
+       res.json({success: true, result: anuncioActualizado});
+    } catch (err){
+        next(err);
+    }
+});
+
+/**
+ * DELETE /anuncios
+ * Elimina un anuncio
+ */
+router.delete('/:id', async (req,res, next) =>{
+    try{
+    const _id = req.params.id;
+    await Anuncios.remove({_id: _id }).exec();
+    res.json({success: true});
+    }catch (err){
+        next(err);
+    }
+
+})
+
 module.exports = router;
