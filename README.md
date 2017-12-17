@@ -53,3 +53,5 @@ Para insertar un array en el módulo de anuncios pasaremos tantos tags como tipo
 Activado el includeTotal, este nos devolverá la cantidad total de registros de la consulta
 en /bin creamos install_db
 
+**Para más información consultar en la [WIKI](https://github.com/JosepCristobal/nodepop/wiki) del proyecto 
+

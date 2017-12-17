@@ -1,3 +1,5 @@
+//import { Error } from 'mongoose';
+
 'use strict';
 
 const express = require('express');
@@ -25,15 +27,23 @@ router.post('/', (req,res,next) => {
         console.log('No se puede insertar usuario nuevo, faltan datos')
         next(err)
     }else{
-        const usuario = new Usuario(req.body);
-        // lo persistimos en la coleccion de agentes
-        usuario.save((err,usuarioGuardado)=> {
+        const ExpresionCorreo = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+        if (!ExpresionCorreo.test(req.body.email)){
+            console.log('error de formato')
+            new Error('Formato de correo, NO válido');
+            next(err)
+            return ;
+        } else {
+            //El correo ha pasado la prueva de validación
+            const usuario = new Usuario(req.body);
+            // lo persistimos en la coleccion de agentes
+            usuario.save((err,usuarioGuardado)=> {
             if (err){
                 next(err);
                 return;
             }
             res.json({success: true, result: usuarioGuardado});
-        });}
+        });}}
     
     });
     
