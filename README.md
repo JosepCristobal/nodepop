@@ -1,60 +1,58 @@
-# Ejemplos curso Mobile Bootcamp 6 Keepcoding
+[WIKI](https://github.com/JosepCristobal/nodepop/wiki)
+# **Nodepop API**
+**Práctica JS/Node.js/Express, Mongo DB Boot VI (2017)**
 
-## Para arrancar MongoDB podemos usar
+El objetivo es dar soporte de Backend a una aplicación de venta de artículos de segunda mano, llamada Nodepop.
+
+##Requisitos de instalación
+
+###Requisitos previos
+* Node version de desarrollo v8.9.1
+* MongoDB versión de desarrollo v3.4.10
+* Git
+
+###Instalación
+1. Clonar con git desde repositorio (https://github.com/JosepCristobal/nodepop)
+2. Situarnos en carpeta nodepop
+3. Instalamos las dependencia con $npm install.
+4. Copiar .env.example a .env y revisar los valores
+ 
+### Verificar existencia y arrancar MongoDB. 
+
+En el directorio donde se instala MongoDB creamos la subcarpeta ./data/db.
+Deberemos estar en la carpeta raiz de MongoDB.
+
+Usaremos el siguiente comando para inicializar la Base de datos,
 
 ./bin/mongod --dbpath ./data/db --directoryperdb
-## Despliegue
 
-Copiar .env.example a env y revisar los valores
 
-## Para ejecutar el proyecto en modo desarrollo
+### Para ejecutar el proyecto
+Para la carga inicial de datos en la BBDD ejecutaremos:
+$npm run installDB
 
-npm run dev
+Si queremos arrancar en modo desarrollo :
+$npm run dev
 
-Creamos carpeta NODEPOP
-Instalamos Express con: express --ejs --git nodepop
-Init: npm init
-Instalamos dependencias: npm install
-Instalamos módulo para acceso a variables de entorno: npm install dotenv
-Instalamos cross-env par compatibilizar variables de entorno para diferentes S.O.: npm install cross-env
-Instalamos Mongoose para acceso a la BBDD: npm install mongoose
-Creamos carpeta routes/apiv1 para el versionado de los diferentes APIs.
-Creamos carpeta /lib para almacenar las librerías, como la conexión de Mongoose a MongoDB
-Creamos la carpeta /models para almacenar los modelos
-Para la autenticación JWT instalamos : npm install jsonwebtoken
-Creamos carpeta en public/images/anuncios
-Creamos fichero en /lib/CreateDB para poner el código de vaciado y carga de la BBDD
-Creamos libreria jwtAuth para la validación de usuarios de jwt
-Creamos la carpeta /models para crear los modelos.
-En app.js añadimos la linea //Rutas del APIv1
-En App // Cargamos el conector a la base de datos
-Para la encriptación del password despues de documentarme, decido utilizar bcrypt
-Link sobre articulo en español: https://solidgeargroup.com/password-nodejs-mongodb-bcrypt?lang=es
-instalamos con npm: npm install bcrypt
-instalamos mongoose-validate: npm install mongoose-validate
-Ya podemos recibir login y pass y podemos verificar si son correctos
-los parametros se recogen de la Url http://localhost:3000/apiv1/usuarios/?email=pepe@pepe.moc&clave=1234
-Creamos un midelware para que nos permita vaciar Mongo Nodepop y recargar datos nuevos en la BBDD
-Creamos en /bin un fichero install_db
-Y en package.json modificamos para que con npm run install_db podamos generar datos para la BBDD
-Creamos carpeta config para guardar los ficheros a importar de anuncios, usuarios y insternalización
-Problemas----dejamos pendiente
-Creamos las rutas para los anuncios con consultas, etc
-Creamos el insert a traves de las rutas y en el metodo post
-Creamos la consulta con los parametros y filtros  metodos GET
-encontramos información de las querys y parametros en la ruta de la url
-https://www.npmjs.com/package/mongo-querystring
-Aplicamos filtro por tags en anuncios
-empezamos con la autenticación
-dejamos la consulta de usuarios ya que la tenemos hecha.
-ya somos capaces de devolver el token de la autenticación con el id de usuario.
-Instalamos dotenv para poder crear variable de entorno en .env
-Para insertar un array en el módulo de anuncios pasaremos tantos tags como tipos tengamos de tags
-Activado el includeTotal, este nos devolverá la cantidad total de registros de la consulta
-en /bin creamos install_db
-en usuarios creamos la validación de formato del email en las altas
-en ususarios verificamos la duplicidad de usuarios al hacer las altas
-en anuncios añadiremos la posibilidad de updatearlos y de borrarlos
+Para arrancar en modo normal con una sola instancia :
+$npm start
 
-**Para más información consultar en la [WIKI](https://github.com/JosepCristobal/nodepop/wiki) del proyecto 
+Para arrancar en modo cluster con múltiples instancias:
+$npm cluster
+
+###Operaciones del API
+* Registro de usuarios (nombre, email, constraseña).
+* Autenticación (email, contraseña).
+* Consulta de anuncios según varios criterios de búsqueda.
+* Creación de anuncios.
+* Consulta de TAGs para clasificar los anuncios.
+
+###Documentación 
+Para más información consultar en la [WIKI](https://github.com/JosepCristobal/nodepop/wiki) del proyecto.
+
+###Notas de versión
+* 0.0.1 Start.
+
+###Autor
+Josep Cristobal 
 

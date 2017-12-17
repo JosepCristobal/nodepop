@@ -31,3 +31,7 @@ npm-debug.log
 
 #Exlusion del .env variables de entorno
 .env
+
+#Excusio de las notas internas
+notas.md
+README_2.md
