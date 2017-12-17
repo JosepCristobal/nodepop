@@ -9,11 +9,8 @@ const REQUIRED_PASSWORD_LENGTH = 6
 const jwtAuth = require ('../../lib/jwtAuth');
 
 //Activamos la identificación de usuario a tavés de su token, en todas las rutas
-router.use(jwtAuth(),(req,res,next) => {
-    //En este punto podemos recuperar el _id del usuario a través de su token
-    const usuarioId=res.userId;
-    next();
-});
+//router.use(jwtAuth());
+
 
 // cargar el modelo Agente
 const Usuario = require('../../models/Usuario');
@@ -70,7 +67,7 @@ router.post('/', async (req,res,next) => {
  * con usuario, password y token podremos consultar la lista de usuarios
  */
 
-router.get('/', async (req, res, next) => {
+router.get('/', router.use(jwtAuth()) , async (req, res, next) => {
     try{
         const email = req.query.email;
         const clave = req.query.clave;
@@ -101,7 +98,7 @@ router.get('/', async (req, res, next) => {
  * DELETE /usuarios
  * Elimina un usuario
  */
-router.delete('/:id', async (req,res, next) =>{
+router.delete('/:id', router.use(jwtAuth()), async (req,res, next) =>{
     try{
     const _id = req.params.id;
     await Usuario.remove({_id: _id }).exec();
