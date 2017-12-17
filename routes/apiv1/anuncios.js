@@ -4,10 +4,11 @@ const express = require('express');
 const router = express.Router();
 const jwtAuth = require ('../../lib/jwtAuth');
 
-// cargar el modelo Agente
+// cargar el modelo Anuncios
 const Anuncios = require('../../models/Anuncios');
+//Activamos la identificación de usuario a tavés de su token, en todas las rutas
 router.use(jwtAuth(),(req,res,next) => {
-    //En este punto podemos recuperar el _id del usuario a través de su token
+//En este punto podemos recuperar el _id del usuario a través de su token
     const usuarioId=res.userId;
     next();
 });
@@ -33,7 +34,7 @@ router.post('/', (req,res,next) => {
     
 /**
  * GET /anuncios
- * Obtener una lista de agentes
+ * Obtener una lista de anuncios con posibles filtros 
  */
 router.get('/', async (req, res, next) => {
     try{
@@ -41,7 +42,7 @@ router.get('/', async (req, res, next) => {
         const venta = req.query.venta;
         const precio =req.query.precio;
         const tags = req.query.tags;
-        const limit = parseInt(req.query.limit); // Numbrer(str)
+        const limit = parseInt(req.query.limit); 
         const skip = parseInt(req.query.skip);
         const sort = req.query.sort;
         const fields = req.query.fields;
@@ -49,10 +50,12 @@ router.get('/', async (req, res, next) => {
         //creo el filtro vacío
         let filter = {};
     if(nombre){
-        console.log('has pasado por nombre', nombre);
+        //Verificamos si existe nombre y generamos un filtro con expresión regular
+        //para buscar por la coincidencia de las primeras letras del nobre de articulo
         filter.nombre = { $regex: "^" + nombre, $options: "i" };
     }
     if(venta){
+        // En este filtro determinamos si es un articulo en venta o búsqueda
         filter.venta = venta;
     }
     if(tags){
@@ -61,6 +64,7 @@ router.get('/', async (req, res, next) => {
         filter.tags =  {$in: tagA};
     }
     if(precio){
+        //En este punto filtramos por precio, desde-hasta, hasta, desde
         const valorR = precio.split("-")
         if (valorR.length === 1){
             filter.precio = '50';
@@ -82,7 +86,8 @@ router.get('/', async (req, res, next) => {
     //llamamos al metodo Anuncios.list que hemos creado en el modelo
         
         const rows = await Anuncios.list(filter,limit,skip,sort,fields);
-        
+        // En este punto determinamos si nos han pedido que determinemos el total de registros
+        // en base al filtro (filter)
         if (req.query.includeTotal==='true'){
             const rowsCount = await Anuncios.countTot(filter);
             res.json({succes: true,total: rowsCount, result: rows});

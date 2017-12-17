@@ -6,8 +6,14 @@ const bcrypt = require('bcrypt')
 
 const SALT_WORK_FACTOR = 10 
 const REQUIRED_PASSWORD_LENGTH = 6
-//const basicAuth = require('../../lib/basicAuth');
-//const jwtAuth = require ('../../lib/jwtAuth');
+const jwtAuth = require ('../../lib/jwtAuth');
+
+//Activamos la identificación de usuario a tavés de su token, en todas las rutas
+router.use(jwtAuth(),(req,res,next) => {
+    //En este punto podemos recuperar el _id del usuario a través de su token
+    const usuarioId=res.userId;
+    next();
+});
 
 // cargar el modelo Agente
 const Usuario = require('../../models/Usuario');
@@ -15,6 +21,10 @@ const Usuario = require('../../models/Usuario');
 
 router.post('/', (req,res,next) => {
     //Creamos un usuario  en memoria segun su modelo ya definido
+    if(!req.body.name||!req.body.clave||!req.body.email){
+        console.log('No se puede insertar usuario nuevo, faltan datos')
+        next(err)
+    }else{
         const usuario = new Usuario(req.body);
         // lo persistimos en la coleccion de agentes
         usuario.save((err,usuarioGuardado)=> {
@@ -23,7 +33,7 @@ router.post('/', (req,res,next) => {
                 return;
             }
             res.json({success: true, result: usuarioGuardado});
-        });
+        });}
     
     });
     

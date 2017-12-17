@@ -26,54 +26,36 @@ usuarioSchema.pre('save', function(next){
      });
 
 
-  // Creamos un método estático
+  // Creamos un método estático para buscar una lista completa de usuarios
   usuarioSchema.statics.findByEmailAndPassword = function(filters,limit, skip, sort, fields){
-    //obtenemos la query sin eejcutarla
+    //obtenemos la query sin ejcutarla
     const query = Usuario.find(filters);
     query.limit (limit);
     query.skip(skip);
     query.sort(sort);
     query.select(fields);
-// ejecutamos la queri y devolemos una promesa
+// ejecutamos la query y devolemos una promesa
     return query.exec();
 }
   
  // Creamos un método estático
  usuarioSchema.statics.findByEmailAndPasswordS = function(filters){
-    //obtenemos la query sin eejcutarla
-    const query = Usuario.find(filters);
-// ejecutamos la queri y devolemos una promesa
+    //obtenemos la query sin ejcutarla
+    const query = Usuario.findOne(filters);
+    // ejecutamos la query y devolemos una promesa
     return query.exec();
 }
 
-     // Creamos un método estático
+// Creamos un método estático
 usuarioSchema.statics.compara = function (password,user){
-       // usuarioSchema.find({email: email}, function(err,user){
-         //   if (err) return cb(err)
-         //   if (!user) return cb()
              const resultado = bcrypt.compare(password, user.clave, (err,res) =>{
-                    //console.log('Resultado final',err,res ? user:null);
+
                     if (err){
-                        console.log('Error', err)
+                        console.log('Error password', err)
                     }
                    return;
-               })
-       // })
+               });
     } 
-// Creamos un método estático
-//usuarioSchema.statics.list = function(filters,limit, skip, sort, fields){
-    //obtenemos la query sin eejcutarla
-    //const query =Agente.find(filters);
-    //query.limit (limit);
-    //query.skip(skip);
-   // query.sort(sort);
-    //query.select(fields);
-// ejecutamos la queri y devolemos una promesa
-    //return query.exec();
-//}
-
-// y por ultimo creamos el modelo
-
 const Usuario = mongoose.model('Usuario', usuarioSchema);
 
 //y por ultimo lo exportamos

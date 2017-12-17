@@ -15,7 +15,7 @@ const anuncioSchema = mongoose.Schema({
 // Creamos un método estático para la búsqueda de articulos
 //búsqueda paginada
 anuncioSchema.statics.list = function(filters,limit, skip, sort, fields){
-    //obtenemos la query sin eejcutarla
+    //obtenemos la query sin ejcutarla
     const query = Anuncios.find(filters);
     query.limit (limit);
     query.skip(skip);
@@ -27,8 +27,8 @@ anuncioSchema.statics.list = function(filters,limit, skip, sort, fields){
 
 // Creamos un método estático para el recuento de articulos según criterios de búsqueda
 anuncioSchema.statics.countTot = function(filters){
-    //obtenemos la query sin eejcutarla
-    const queryC = Anuncios.count(filters);
+//obtenemos la query sin ejcutarla
+const queryC = Anuncios.count(filters);
   
 // ejecutamos la query y devolemos una promesa
     return queryC.exec();
@@ -38,6 +38,6 @@ anuncioSchema.statics.countTot = function(filters){
 
 const Anuncios = mongoose.model('Anuncios', anuncioSchema);
 
-//y por último lo exportamos
+//y lo exportamos
 
 module.exports = Anuncios;
