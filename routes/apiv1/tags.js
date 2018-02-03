@@ -18,6 +18,7 @@ router.use(jwtAuth(),(req,res,next) => {
  */
 router.get('/', (req, res, next) => {
     const misTags2 = misTags.split(",");
+    
    res.json({succes: true, result: misTags2});
    return;
    next();
