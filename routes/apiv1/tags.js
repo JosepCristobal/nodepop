@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const misTags = process.env.TAGS.split(",")
+const misTags = process.env.TAGS;
 const jwtAuth = require ('../../lib/jwtAuth');
 
 //Activamos la identificación de usuario a tavés de su token, en todas las rutas
@@ -17,7 +17,8 @@ router.use(jwtAuth(),(req,res,next) => {
  * Obtener validación de usuario
  */
 router.get('/', (req, res, next) => {
-   res.json({succes: true, result: misTags});
+    const misTags2 = misTags.split(",");
+   res.json({succes: true, result: misTags2});
    return;
    next();
 });
