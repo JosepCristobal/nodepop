@@ -55,7 +55,7 @@ Para más información consultar en la [WIKI](https://github.com/JosepCristobal/
 
 ## Despliegue de la aplicación en servidor publico
 Para poder hacer pruebas en un entorno real y siguiendo las indicaciones del curso de Devops, en las siguientes url
-podremos ejecutar y evaluar la API:
+podremos ejecutar y evaluar la aplicación/API:
 
  ### Páginas estáticas:
   * pepetrans.com
@@ -68,7 +68,7 @@ podremos ejecutar y evaluar la API:
  ### Acceso a página estatica para verificar cabecera.
    https://node.pepetrans.com/images/Anuncios/iPhone5S.jpg
    
-  Para más información consultar en la [WIKI](https://github.com/JosepCristobal/nodepop/wiki) del proyecto.
+  Para más información consultar en la [WIKI](https://github.com/JosepCristobal/nodepop/wiki/Servidor-para-DevOps) del proyecto.
 
 ### Autor
  Josep Cristobal
