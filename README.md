@@ -53,18 +53,21 @@ Para más información consultar en la [WIKI](https://github.com/JosepCristobal/
 ### Notas de versión
 * 0.0.1 Start.
 
-### Despliegue de la aplicación en servidor publico
+## Despliegue de la aplicación en servidor publico
 Para poder hacer pruebas en un entorno real y siguiendo las indicaciones del curso de Devops, en las siguientes url
 podremos ejecutar y evaluar la API:
 
- ## Páginas estáticas:
+ ### Páginas estáticas:
   * pepetrans.com
   * www.pepetrans.com
   * Ip pública : 35.178.11.9
  
- ## Acceso API Nodepop
+ ### Acceso API Nodepop
   * node.pepetrans.com
-  
+ 
+ ### Acceso a página estatica para verificar cabecera.
+   https://node.pepetrans.com/images/Anuncios/iPhone5S.jpg
+   
   Para más información consultar en la [WIKI](https://github.com/JosepCristobal/nodepop/wiki) del proyecto.
 
 ### Autor
