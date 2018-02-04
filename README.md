@@ -58,9 +58,9 @@ Para poder hacer pruebas en un entorno real y siguiendo las indicaciones del cur
 podremos ejecutar y evaluar la aplicación/API:
 
  ### Páginas estáticas:
-  * pepetrans.com
-  * www.pepetrans.com
-  * Ip pública : 35.178.11.9
+  * https://pepetrans.com
+  * https://www.pepetrans.com
+  * Ip pública : https://35.178.11.9
  
  ### Acceso API Nodepop
   * node.pepetrans.com
